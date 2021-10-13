@@ -1,3 +1,5 @@
+//Messages d'erreur
+
 function isEmpty(input) {
     if (input === "") {
         return false
@@ -46,7 +48,7 @@ function checkBirthdate(input) {
     let year = today.getFullYear();
 
     if (isEmpty(input) === false) {
-        birthdateError.setAttribute('data-error', 'Vous devez entrer une date de naissance valide.');
+        birthdateError.setAttribute('data-error', 'Vous devez entrer votre date de naissance.');
         birthdateError.setAttribute('data-error-visible', 'true');
     } else if (input.slice(0, 4) > year - 16) {
         birthdateError.setAttribute('data-error', 'Vous devez avoir plus de 16 ans.');
@@ -59,7 +61,7 @@ function checkBirthdate(input) {
 
 function checkQuantityTournament(input) {
     if (isEmpty(input) === false) {
-        quantityTournamentError.setAttribute('data-error', 'Hey ! N\'oublie pas d\'inscrire ton nombre de participation');
+        quantityTournamentError.setAttribute('data-error', "Vous devez choisir une option.");
         quantityTournamentError.setAttribute('data-error-visible', 'true');
     } else {
         quantityTournamentError.setAttribute('data-error-visible', 'false');
@@ -87,4 +89,16 @@ function checkCheckbox() {
         generalConditionError.setAttribute('data-error-visible', 'false');
         return true;
     }
+}
+
+// Message d'envoi
+
+function form_validate(e) {
+    var confirm_submit = document.getElementById("confirm_submit");
+    e.preventDefault();
+}
+
+if (form.click == true) {
+    console.log("Registration form has been sent.");
+    var confirm_submit = document.getElementById("confirm_submit");
 }
