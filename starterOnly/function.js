@@ -8,7 +8,7 @@ document.forms[0].addEventListener("submit", function(e) {
     checkEmail(document.getElementById('email').value)
     checkBirthdate(document.getElementById('birthdate').value)
     checkQuantityTournament(document.getElementById('quantity').value)
-        // checkRadio(document.getElementsByClassName('checkbox-input').value)
+    checkRadio(document.getElementsByClassName('checkbox-input').value)
     checkCheckbox(document.getElementById('checkbox1').value)
 });
 
@@ -92,7 +92,10 @@ function checkQuantityTournament(input) {
     }
 }
 
+// lier les 2 fonctions pour devoir selectionner le nombre de villes correspondant au nombre de tournois selectionnés 
+
 function checkRadio() {
+    let allRadio = document.getElementsByClassName('checkbox-input');
     for (let i = 0; i < allRadio.length; i++) {
         if (!allRadio[i].checked) {
             const cities = formData[5];
@@ -106,6 +109,7 @@ function checkRadio() {
 }
 
 function checkCheckbox() {
+    const generalCondition = document.getElementById('checkbox1');
     if (!generalCondition.checked) {
         const generalConditionError = formData[6];
         generalConditionError.setAttribute('data-error', 'Vous devez vérifier que vous acceptez les termes et conditions.');
@@ -118,12 +122,15 @@ function checkCheckbox() {
 
 // Message d'envoi
 
-function form_validate(e) {
-    var confirm_submit = document.getElementById("confirm_submit");
+function form_validate(e) { // ne fonctionne pas
+    const confirmSubmit = document.getElementById("confirm_submit");
+    confirmSubmit.addEventListener('click')
     e.preventDefault();
 }
 
-if (form.click == true) {
-    console.log("Registration form has been sent.");
-    var confirm_submit = document.getElementById("confirm_submit");
+if (form.click == true && checkFirstName == true && checkLastName == true && checkEmail == true && checkBirthdate == true &&
+    checkQuantityTournament == true && checkRadio == true && checkCheckbox == true) {
+    console.log("formulaire envoyé!");
+} else {
+    console.log("Tous les champs doivent être remplis");
 }
