@@ -69,18 +69,19 @@ function checkBirthdate(input) { // Une date anniversaire valide doit être sais
         const birthdateError = formData[3];
         birthdateError.setAttribute('data-error', 'Vous devez entrer votre date de naissance.');
         birthdateError.setAttribute('data-error-visible', 'true');
-        console.log("entrer date de naissance");
+        return false
     }
     if (UsersAge < 18) {
-        birthdateError.setAttribute('data-error', 'Vous devez avoir plus de 18 ans.');
-        birthdateError.setAttribute('data-error-visible', 'true');
-        // return false;
-        console.log("avoir 18 ans")
+        const ageError = formData[3];
+        ageError.setAttribute('data-error', 'Vous devez avoir plus de 18 ans.');
+        ageError.setAttribute('data-error-visible', 'true');
+        return false;
     } else {
         birthdateError.setAttribute('data-error-visible', 'false');
         return true;
     }
 }
+// le message d'erreur ne s'efface pas une fois le champ rempli, ni pour les fonctions suivantes
 
 function checkQuantityTournament(input) {
     if (isEmpty(input) === false) {
@@ -94,7 +95,7 @@ function checkQuantityTournament(input) {
     }
 }
 
-// lier les 2 fonctions pour devoir selectionner le nombre de villes correspondant au nombre de tournois selectionnés 
+// Si checkquantity est rempli les messages d'erreurs pour la suite ne fonctionnent pas
 
 function checkRadio() {
     let allRadio = document.getElementsByClassName('checkbox-input');
