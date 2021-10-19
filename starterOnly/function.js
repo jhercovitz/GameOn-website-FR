@@ -1,5 +1,3 @@
-console.log(formData[0])
-
 //Messages d'erreur
 document.forms[0].addEventListener("submit", function(e) {
     e.preventDefault();
@@ -16,6 +14,7 @@ function isEmpty(input) { //function appelée pour la date anniversaire et les t
     if (input === "") {
         return false
     }
+    return true
 }
 
 function minTwoChar(input) { // au moins deux charactères doivent être saisies
@@ -62,18 +61,21 @@ function checkEmail(input) {
 }
 
 function checkBirthdate(input) { // Une date anniversaire valide doit être saisie
-    let today = new Date();
-    let year = today.getFullYear();
+    let Usersbirthdate = new Date();
+    let currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00';
+    let UsersAge = Math.floor((Date.now(currentDate) - Usersbirthdate) / (31557600000));
 
     if (isEmpty(input) === false) {
         const birthdateError = formData[3];
         birthdateError.setAttribute('data-error', 'Vous devez entrer votre date de naissance.');
         birthdateError.setAttribute('data-error-visible', 'true');
-        return false;
-        // } else if ( checkBirthDate > year - 16) {
-        //     birthdateError.setAttribute('data-error', 'Vous devez avoir plus de 16 ans.');
-        //     birthdateError.setAttribute('data-error-visible', 'true');
-        //     return false;
+        console.log("entrer date de naissance");
+    }
+    if (UsersAge < 18) {
+        birthdateError.setAttribute('data-error', 'Vous devez avoir plus de 18 ans.');
+        birthdateError.setAttribute('data-error-visible', 'true');
+        // return false;
+        console.log("avoir 18 ans")
     } else {
         birthdateError.setAttribute('data-error-visible', 'false');
         return true;
@@ -121,10 +123,10 @@ function checkCheckbox() {
 }
 
 // Message d'envoi
-
-function form_validate(e) { // ne fonctionne pas
+// ne fonctionne pas
+function formValidate(e) {
     const confirmSubmit = document.getElementById("confirm_submit");
-    confirmSubmit.addEventListener('click')
+    confirmSubmit.addEventListener('click');
     e.preventDefault();
 }
 
