@@ -60,32 +60,31 @@ function checkEmail(input) {
     }
 }
 
-function checkBirthdate(input) { // Une date anniversaire valide doit être saisie
-    let Usersbirthdate = new Date();
-    let currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00';
-    let UsersAge = Math.floor((Date.now(currentDate) - Usersbirthdate) / (31557600000));
+function checkBirthdate(input) {
+    let usersbirthdate = new Date(input); // recuperere la date saisie par l'utilisateur
+    let currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00'; // recupere la date du jour
+    let usersAge = Math.floor((Date.now(currentDate) - usersbirthdate) / (31557600000)); // compare les 2 dates
+    const birthdateError = formData[3];
 
-    if (isEmpty(input) === false) {
-        const birthdateError = formData[3];
-        birthdateError.setAttribute('data-error', 'Vous devez entrer votre date de naissance.');
+    if (isEmpty(input) === false) { // l'utilisateur doit remplir ce champ
+        birthdateError.setAttribute('data-error', 'Veuillez entrer votre date de naissance.');
         birthdateError.setAttribute('data-error-visible', 'true');
         return false
     }
-    if (UsersAge < 18) {
-        const ageError = formData[3];
-        ageError.setAttribute('data-error', 'Vous devez avoir plus de 18 ans.');
-        ageError.setAttribute('data-error-visible', 'true');
+    if (usersAge < 18) { // l'utilisateur doit être majeur
+        birthdateError.setAttribute('data-error', 'Vous devez avoir plus de 18 ans.');
+        birthdateError.setAttribute('data-error-visible', 'true');
         return false;
     } else {
         birthdateError.setAttribute('data-error-visible', 'false');
         return true;
+
     }
 }
-// le message d'erreur ne s'efface pas une fois le champ rempli, ni pour les fonctions suivantes
 
-function checkQuantityTournament(input) {
+function checkQuantityTournament(input) { // l'utilisateur doit remplir ce champ
+    const quantityTournamentError = formData[4];
     if (isEmpty(input) === false) {
-        const quantityTournamentError = formData[4];
         quantityTournamentError.setAttribute('data-error', "Vous devez choisir une option.");
         quantityTournamentError.setAttribute('data-error-visible', 'true');
         return false
@@ -95,13 +94,11 @@ function checkQuantityTournament(input) {
     }
 }
 
-// Si checkquantity est rempli les messages d'erreurs pour la suite ne fonctionnent pas
-
-function checkRadio() {
+function checkRadio() { // l'utilisateur doit selectionner une ville
+    const cities = formData[5];
     let allRadio = document.getElementsByClassName('checkbox-input');
     for (let i = 0; i < allRadio.length; i++) {
         if (!allRadio[i].checked) {
-            const cities = formData[5];
             cities.setAttribute('data-error', 'Vous devez choisir une ville.');
             cities.setAttribute('data-error-visible', 'true');
         } else {
@@ -113,8 +110,8 @@ function checkRadio() {
 
 function checkCheckbox() {
     const generalCondition = document.getElementById('checkbox1');
+    const generalConditionError = formData[6];
     if (!generalCondition.checked) {
-        const generalConditionError = formData[6];
         generalConditionError.setAttribute('data-error', 'Vous devez vérifier que vous acceptez les termes et conditions.');
         generalConditionError.setAttribute('data-error-visible', 'true');
     } else {
@@ -134,6 +131,9 @@ function formValidate(e) {
 if (form.click == true && checkFirstName == true && checkLastName == true && checkEmail == true && checkBirthdate == true &&
     checkQuantityTournament == true && checkRadio == true && checkCheckbox == true) {
     console.log("formulaire envoyé!");
+    // return true;
 } else {
     console.log("Tous les champs doivent être remplis");
+    // return false;
+
 }
