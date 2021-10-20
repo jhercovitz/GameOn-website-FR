@@ -85,7 +85,7 @@ function checkBirthdate(input) {
 function checkQuantityTournament(input) { // l'utilisateur doit remplir ce champ
     const quantityTournamentError = formData[4];
     if (isEmpty(input) === false) {
-        quantityTournamentError.setAttribute('data-error', "Vous devez choisir une option.");
+        quantityTournamentError.setAttribute('data-error', "Veuillez choisir une option.");
         quantityTournamentError.setAttribute('data-error-visible', 'true');
         return false
     } else {
@@ -95,24 +95,26 @@ function checkQuantityTournament(input) { // l'utilisateur doit remplir ce champ
 }
 
 function checkRadio() { // l'utilisateur doit selectionner une ville
-    const cities = formData[5];
+    const citiesError = formData[5];
     let allRadio = document.getElementsByClassName('checkbox-input');
     for (let i = 0; i < allRadio.length; i++) {
         if (!allRadio[i].checked) {
-            cities.setAttribute('data-error', 'Vous devez choisir une ville.');
-            cities.setAttribute('data-error-visible', 'true');
+            citiesError.setAttribute('data-error', 'Veuillez choisir une ville.');
+            citiesError.setAttribute('data-error-visible', 'true');
+            return false;
         } else {
-            cities.setAttribute('data-error-visible', 'false');
+            citiesError.setAttribute('data-error-visible', 'false');
             return true;
         }
     }
 }
+// ne fonctionne qu'avec new york
 
 function checkCheckbox() {
     const generalCondition = document.getElementById('checkbox1');
     const generalConditionError = formData[6];
     if (!generalCondition.checked) {
-        generalConditionError.setAttribute('data-error', 'Vous devez vérifier que vous acceptez les termes et conditions.');
+        generalConditionError.setAttribute('data-error', 'Merci d\'acceptez les termes et conditions.');
         generalConditionError.setAttribute('data-error-visible', 'true');
     } else {
         generalConditionError.setAttribute('data-error-visible', 'false');
@@ -128,12 +130,11 @@ function formValidate(e) {
     e.preventDefault();
 }
 
-if (form.click == true && checkFirstName == true && checkLastName == true && checkEmail == true && checkBirthdate == true &&
-    checkQuantityTournament == true && checkRadio == true && checkCheckbox == true) {
+if (form.click == true && checkFirstName && checkLastName && checkEmail && checkBirthdate &&
+    checkQuantityTournament && checkRadio && checkCheckbox == true) {
     console.log("formulaire envoyé!");
     // return true;
 } else {
     console.log("Tous les champs doivent être remplis");
     // return false;
-
 }
