@@ -1,14 +1,22 @@
-//Messages d'erreur
 document.forms[0].addEventListener("submit", function(e) {
     e.preventDefault();
-    checkFirstName(document.getElementById('first').value) // vérifie la valeur saisie par l'utlisateur
-    checkLastName(document.getElementById('last').value)
-    checkEmail(document.getElementById('email').value)
-    checkBirthdate(document.getElementById('birthdate').value)
-    checkQuantityTournament(document.getElementById('quantity').value)
-    checkRadio(document.getElementsByClassName('checkbox-input').value)
-    checkCheckbox(document.getElementById('checkbox1').value)
+    const isFirstNameValid = checkFirstName(document.getElementById('first').value) // vérifie la valeur saisie par l'utlisateur
+    const isLastNameValid = checkLastName(document.getElementById('last').value)
+    const isEmailValid = checkEmail(document.getElementById('email').value)
+    const isBirthdateValid = checkBirthdate(document.getElementById('birthdate').value)
+    const isQuantityValid = checkQuantityTournament(document.getElementById('quantity').value)
+    const isRadioValid = checkRadio(document.getElementsByClassName('checkbox-input').value)
+    const ischeckboxValid = checkCheckbox(document.getElementById('checkbox1').value)
+
+    if (isFirstNameValid && isLastNameValid && isEmailValid && isBirthdateValid && isQuantityValid && isRadioValid && ischeckboxValid) {
+        alert("OK")
+        console.log('form envoyé');
+        return true
+
+    }
 });
+
+//Messages d'erreur
 
 function isEmpty(input) { //function appelée pour la date anniversaire et les tournois
     if (input === "") {
@@ -50,7 +58,7 @@ function checkLastName(input) {
 
 function checkEmail(input) {
     const emailError = formData[2];
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,64})+$/.test(input)) {
         emailError.setAttribute('data-error', 'l\'email n\'est pas valide');
         emailError.setAttribute('data-error-visible', 'true');
         return false
@@ -62,10 +70,9 @@ function checkEmail(input) {
 
 function checkBirthdate(input) {
     let usersbirthdate = new Date(input); // recuperere la date saisie par l'utilisateur
-    let currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00'; // recupere la date du jour
-    let usersAge = Math.floor((Date.now(currentDate) - usersbirthdate) / (31557600000)); // compare les 2 dates
+    let currentDate = new Date() // recupere la date du jour
+    let usersAge = Math.floor((currentDate - usersbirthdate) / (31557600000)); // compare les 2 dates
     const birthdateError = formData[3];
-
     if (isEmpty(input) === false) { // l'utilisateur doit remplir ce champ
         birthdateError.setAttribute('data-error', 'Veuillez entrer votre date de naissance.');
         birthdateError.setAttribute('data-error-visible', 'true');
@@ -96,19 +103,24 @@ function checkQuantityTournament(input) { // l'utilisateur doit remplir ce champ
 
 function checkRadio() { // l'utilisateur doit selectionner une ville
     const citiesError = formData[5];
-    let allRadio = document.getElementsByClassName('checkbox-input');
+    let allRadio = document.getElementsByName('location');
+
+    let isChecked = false;
     for (let i = 0; i < allRadio.length; i++) {
-        if (!allRadio[i].checked) {
-            citiesError.setAttribute('data-error', 'Veuillez choisir une ville.');
-            citiesError.setAttribute('data-error-visible', 'true');
-            return false;
-        } else {
-            citiesError.setAttribute('data-error-visible', 'false');
-            return true;
+        if (allRadio[i].checked) {
+            isChecked = true;
         }
     }
+    if (isChecked) {
+        citiesError.setAttribute('data-error-visible', 'false');
+        return true;
+    } else {
+        citiesError.setAttribute('data-error', 'Veuillez choisir une ville.');
+        citiesError.setAttribute('data-error-visible', 'true');
+        return false;
+    }
+
 }
-// ne fonctionne qu'avec new york
 
 function checkCheckbox() {
     const generalCondition = document.getElementById('checkbox1');
@@ -124,17 +136,16 @@ function checkCheckbox() {
 
 // Message d'envoi
 // ne fonctionne pas
-function formValidate(e) {
-    const confirmSubmit = document.getElementById("confirm_submit");
-    confirmSubmit.addEventListener('click');
-    e.preventDefault();
-}
+// function formValidate(e) {
+//     const confirmSubmit = document.getElementById("confirm_submit");
+//     confirmSubmit.addEventListener('click');
+//     e.preventDefault();
 
-if (form.click == true && checkFirstName && checkLastName && checkEmail && checkBirthdate &&
-    checkQuantityTournament && checkRadio && checkCheckbox == true) {
-    console.log("formulaire envoyé!");
-    // return true;
-} else {
-    console.log("Tous les champs doivent être remplis");
-    // return false;
-}
+//     if (form.click == true) {
+//         console.log("formulaire envoyé!");
+//         // return true;
+//     } else {
+//         console.log("Tous les champs doivent être remplis");
+//         // return false;
+//     }
+// }
