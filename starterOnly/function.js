@@ -8,11 +8,26 @@ document.forms[0].addEventListener("submit", function(e) {
     const isRadioValid = checkRadio(document.getElementsByClassName('checkbox-input').value)
     const ischeckboxValid = checkCheckbox(document.getElementById('checkbox1').value)
 
+
+    // on valide que tous les champs soient ok pour envoyer le formulaire
     if (isFirstNameValid && isLastNameValid && isEmailValid && isBirthdateValid && isQuantityValid && isRadioValid && ischeckboxValid) {
         alert("OK")
         console.log('form envoyé');
-        return true
+        modalbg.style.display = "none";
+    }
 
+    // envoi du message de confirmation
+    // ne fonctionne pas
+    const confirmMessage = document.getElementById('confirm_submit');
+
+    modalBtn.forEach((btn) => btn.addEventListener("click", launchconfirm));
+
+    function launchconfirm() {
+        confirmMessage.style.display = "block";
+    }
+
+    function resetForm() {
+        document.getElementsByClassName("btn-submit").reset();
     }
 });
 
@@ -136,16 +151,16 @@ function checkCheckbox() {
 
 // Message d'envoi
 // ne fonctionne pas
-// function formValidate(e) {
-//     const confirmSubmit = document.getElementById("confirm_submit");
-//     confirmSubmit.addEventListener('click');
-//     e.preventDefault();
+function formValidate(e) {
+    document.getElementById("confirm_submit").submit();
+    confirmSubmit.addEventListener('click');
+    e.preventDefault();
 
-//     if (form.click == true) {
-//         console.log("formulaire envoyé!");
-//         // return true;
-//     } else {
-//         console.log("Tous les champs doivent être remplis");
-//         // return false;
-//     }
-// }
+    if (form.click == true) {
+        console.log("formulaire envoyé!");
+        // return true;
+    } else {
+        console.log("Tous les champs doivent être remplis");
+        // return false;
+    }
+}

@@ -24,3 +24,9 @@ function launchModal() {
 function closeModal() {
     modalbg.style.display = "none";
 }
+
+// reset form after modal close
+// ne fonctionne pas
+function resetForm() {
+    // document.getElementsByClassName("btn-submit").reset(formData);
+}
