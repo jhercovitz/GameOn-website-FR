@@ -20,13 +20,8 @@ function launchModal() {
     modalbg.style.display = "block";
 }
 
-//close modal
+//close modal and reset
 function closeModal() {
     modalbg.style.display = "none";
-}
-
-// reset form after modal close
-// ne fonctionne pas
-function resetForm() {
-    // document.getElementsByClassName("btn-submit").reset(formData);
+    document.getElementById("myForm").reset();
 }

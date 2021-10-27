@@ -14,6 +14,7 @@ document.forms[0].addEventListener("submit", function(e) {
         alert("OK")
         console.log('form envoyé');
         modalbg.style.display = "none";
+        document.getElementById("myForm").reset(); // reset form
     }
 
     // envoi du message de confirmation
@@ -25,11 +26,9 @@ document.forms[0].addEventListener("submit", function(e) {
     function launchconfirm() {
         confirmMessage.style.display = "block";
     }
-
-    function resetForm() {
-        document.getElementsByClassName("btn-submit").reset();
-    }
 });
+
+
 
 //Messages d'erreur
 
@@ -151,16 +150,16 @@ function checkCheckbox() {
 
 // Message d'envoi
 // ne fonctionne pas
-function formValidate(e) {
-    document.getElementById("confirm_submit").submit();
-    confirmSubmit.addEventListener('click');
-    e.preventDefault();
+// function formValidate(e) {
+//     document.getElementById("confirm_submit").submit();
+//     confirmSubmit.addEventListener('click');
+//     e.preventDefault();
 
-    if (form.click == true) {
-        console.log("formulaire envoyé!");
-        // return true;
-    } else {
-        console.log("Tous les champs doivent être remplis");
-        // return false;
-    }
-}
+//     if (form.click == true) {
+//         console.log("formulaire envoyé!");
+//         // return true;
+//     } else {
+//         console.log("Tous les champs doivent être remplis");
+//         // return false;
+//     }
+// }
