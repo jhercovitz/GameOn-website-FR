@@ -11,9 +11,7 @@ document.forms[0].addEventListener("submit", function(e) {
 
     // on valide que tous les champs soient ok pour envoyer le formulaire
     if (isFirstNameValid && isLastNameValid && isEmailValid && isBirthdateValid && isQuantityValid && isRadioValid && ischeckboxValid) {
-        alert("OK")
-        console.log('form envoyé');
-        modalbg.style.display = "none";
+        modalbg.style.display = "none"; // ferme le form
         document.getElementById("myForm").reset(); // reset form
     }
 
@@ -25,6 +23,7 @@ document.forms[0].addEventListener("submit", function(e) {
 
     function launchconfirm() {
         confirmMessage.style.display = "block";
+        console.log("message envoyé");
     }
 });
 
@@ -147,19 +146,3 @@ function checkCheckbox() {
         return true;
     }
 }
-
-// Message d'envoi
-// ne fonctionne pas
-// function formValidate(e) {
-//     document.getElementById("confirm_submit").submit();
-//     confirmSubmit.addEventListener('click');
-//     e.preventDefault();
-
-//     if (form.click == true) {
-//         console.log("formulaire envoyé!");
-//         // return true;
-//     } else {
-//         console.log("Tous les champs doivent être remplis");
-//         // return false;
-//     }
-// }
