@@ -23,7 +23,6 @@ function launchModal() {
 //close modal and reset
 function closeModal() {
     modalbg.style.display = "none";
-    document.getElementById("myForm").reset();
 }
 
 // les messages d'erreurs ne se reset pas

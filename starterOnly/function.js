@@ -9,17 +9,20 @@ document.forms[0].addEventListener("submit", function(e) {
     const ischeckboxValid = checkCheckbox(document.getElementById('checkbox1').value)
 
 
+
     // on valide que tous les champs soient ok pour envoyer le formulaire
     if (isFirstNameValid && isLastNameValid && isEmailValid && isBirthdateValid && isQuantityValid && isRadioValid && ischeckboxValid) {
-        modalbg.style.display = "none"; // ferme le form
+        const modalcl = document.getElementById("myForm");
+        modalcl.style.display = "none"; // ferme le form
         document.getElementById("myForm").reset(); // reset form
+
     }
 
     // envoi du message de confirmation
     // ne fonctionne pas
     const confirmMessage = document.getElementById('confirm_submit');
 
-    modalBtn.forEach((btn) => btn.addEventListener("click", launchconfirm));
+    document.getElementsByClassName("btn-submit").addEventListener("click", launchconfirm);
 
     function launchconfirm() {
         confirmMessage.style.display = "block";
@@ -45,7 +48,7 @@ function minTwoChar(input) { // au moins deux charactères doivent être saisies
     return true
 }
 
-function checkFirstName(input) {
+function checkFirstName(input) { // l'utilisateur doit remplir ce champ
     const firstNameError = formData[0];
     if (!minTwoChar(input)) {
         firstNameError.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus pour ce champ');
@@ -57,7 +60,7 @@ function checkFirstName(input) {
     }
 }
 
-function checkLastName(input) {
+function checkLastName(input) { // l'utilisateur doit remplir ce champ
     const lastNameError = formData[1];
     if (minTwoChar(input) === false) {
         lastNameError.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus pour ce champ');
@@ -69,7 +72,7 @@ function checkLastName(input) {
     }
 }
 
-function checkEmail(input) {
+function checkEmail(input) { // l'utilisateur doit entrer une adresse mail valide
     const emailError = formData[2];
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,64})+$/.test(input)) {
         emailError.setAttribute('data-error', 'l\'email n\'est pas valide');
@@ -135,7 +138,7 @@ function checkRadio() { // l'utilisateur doit selectionner une ville
 
 }
 
-function checkCheckbox() {
+function checkCheckbox() { // l'utilisateur doit accepter les termes et conditions
     const generalCondition = document.getElementById('checkbox1');
     const generalConditionError = formData[6];
     if (!generalCondition.checked) {
