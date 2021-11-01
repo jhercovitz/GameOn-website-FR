@@ -8,8 +8,6 @@ document.forms[0].addEventListener("submit", function(e) {
     const isRadioValid = checkRadio(document.getElementsByClassName('checkbox-input').value)
     const ischeckboxValid = checkCheckbox(document.getElementById('checkbox1').value)
 
-
-
     // on valide que tous les champs soient ok pour envoyer le formulaire
     if (isFirstNameValid && isLastNameValid && isEmailValid && isBirthdateValid && isQuantityValid && isRadioValid && ischeckboxValid) {
         const modalcl = document.getElementById("myForm");
@@ -114,6 +112,15 @@ function checkQuantityTournament(input) { // l'utilisateur doit remplir ce champ
     } else {
         quantityTournamentError.setAttribute('data-error-visible', 'false');
         return true;
+    }
+}
+
+let number = document.getElementById('quantity'); // bloque les nombres negatifs
+number.onkeydown = function(e) {
+    if (!((e.keyCode > 95 && e.keyCode < 106) || // correspond aux pavés numériques 0 à 9 
+            (e.keyCode > 47 && e.keyCode < 58) || // correspond à 0 à 9 sur la ligne numérique 
+            e.keyCode == 8)) { // 8 est le retour arrière
+        return false;
     }
 }
 
