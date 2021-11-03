@@ -7,25 +7,28 @@ document.forms[0].addEventListener("submit", function(e) {
     const isQuantityValid = checkQuantityTournament(document.getElementById('quantity').value)
     const isRadioValid = checkRadio(document.getElementsByClassName('checkbox-input').value)
     const ischeckboxValid = checkCheckbox(document.getElementById('checkbox1').value)
+    const confirmMessage = document.getElementById('confirm_submit')
 
     // on valide que tous les champs soient ok pour envoyer le formulaire
     if (isFirstNameValid && isLastNameValid && isEmailValid && isBirthdateValid && isQuantityValid && isRadioValid && ischeckboxValid) {
         const modalcl = document.getElementById("myForm");
-        modalcl.style.display = "none"; // ferme le form
+        modalcl.style.display = "none"; // ferme le form et laisse le modal ouvert
         document.getElementById("myForm").reset(); // reset form
+        confirmMessage.style.display = "block";
+        console.log("message envoyé");
 
     }
 
     // envoi du message de confirmation
     // ne fonctionne pas
-    const confirmMessage = document.getElementById('confirm_submit');
 
-    document.getElementsByClassName("btn-submit").addEventListener("click", launchconfirm);
+    // document.getElementsByClassName("btn-submit").addEventListener("click", launchconfirm);
 
-    function launchconfirm() {
-        confirmMessage.style.display = "block";
-        console.log("message envoyé");
-    }
+
+    // function launchconfirm() {
+
+
+    // }
 });
 
 
