@@ -14,24 +14,9 @@ document.forms[0].addEventListener("submit", function(e) {
         const modalcl = document.getElementById("myForm");
         modalcl.style.display = "none"; // ferme le form et laisse le modal ouvert
         document.getElementById("myForm").reset(); // reset form
-        confirmMessage.style.display = "block";
-        console.log("message envoyé");
-
+        confirmMessage.style.display = "block"; // envoi du message de confirmation
     }
-
-    // envoi du message de confirmation
-    // ne fonctionne pas
-
-    // document.getElementsByClassName("btn-submit").addEventListener("click", launchconfirm);
-
-
-    // function launchconfirm() {
-
-
-    // }
 });
-
-
 
 //Messages d'erreur
 
