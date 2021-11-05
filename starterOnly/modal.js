@@ -20,7 +20,7 @@ function launchModal() {
     modalbg.style.display = "block";
 }
 
-//close modal and reset
+//close modal
 function closeModal() {
     modalbg.style.display = "none";
 }

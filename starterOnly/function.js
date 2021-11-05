@@ -1,3 +1,6 @@
+const form = document.getElementById("myForm");
+const confirmMessage = document.getElementById('confirm_submit')
+
 document.forms[0].addEventListener("submit", function(e) {
     e.preventDefault();
     const isFirstNameValid = checkFirstName(document.getElementById('first').value) // vérifie la valeur saisie par l'utlisateur
@@ -7,12 +10,11 @@ document.forms[0].addEventListener("submit", function(e) {
     const isQuantityValid = checkQuantityTournament(document.getElementById('quantity').value)
     const isRadioValid = checkRadio(document.getElementsByClassName('checkbox-input').value)
     const ischeckboxValid = checkCheckbox(document.getElementById('checkbox1').value)
-    const confirmMessage = document.getElementById('confirm_submit')
+
 
     // on valide que tous les champs soient ok pour envoyer le formulaire
     if (isFirstNameValid && isLastNameValid && isEmailValid && isBirthdateValid && isQuantityValid && isRadioValid && ischeckboxValid) {
-        const modalcl = document.getElementById("myForm");
-        modalcl.style.display = "none"; // ferme le form et laisse le modal ouvert
+        form.style.display = "none"; // ferme le form et laisse le modal ouvert
         document.getElementById("myForm").reset(); // reset form
         confirmMessage.style.display = "block"; // envoi du message de confirmation
     }
@@ -144,3 +146,10 @@ function checkCheckbox() { // l'utilisateur doit accepter les termes et conditio
         return true;
     }
 }
+
+const closeConfirm = document.getElementById('close_confirm');
+closeConfirm.addEventListener('click', () => {
+    closeModal();
+    form.style.display = "block"; // ferme le form et laisse le modal ouvert
+    confirmMessage.style.display = "none";
+})
