@@ -148,8 +148,8 @@ function checkCheckbox() { // l'utilisateur doit accepter les termes et conditio
 }
 
 const closeConfirm = document.getElementById('close_confirm');
-closeConfirm.addEventListener('click', () => {
+closeConfirm.addEventListener('click', () => { // ferme le message de confirmation d'envoi
     closeModal();
-    form.style.display = "block"; // ferme le form et laisse le modal ouvert
-    confirmMessage.style.display = "none";
+    form.style.display = "block"; // ré-ouvre le formulaire au clic
+    confirmMessage.style.display = "none"; // empeche la ré-ouverture automatique du message de confirmation
 })
