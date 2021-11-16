@@ -110,9 +110,9 @@ function checkQuantityTournament(input) { // l'utilisateur doit remplir ce champ
     }
 }
 
-function checkRadio() { // l'utilisateur doit selectionner une ville
+function checkRadio() { // l'utilisateur doit selectionner au moins une ville
     const citiesError = formData[5];
-    let allRadio = document.getElementsByName('location');
+    let allRadio = document.getElementsByClassName('checkbox-input');
 
     let isChecked = false;
     for (let i = 0; i < allRadio.length; i++) {
